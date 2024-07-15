@@ -54,7 +54,7 @@ const FileReaderComponent: React.FC = () => {
         valor = valor.replace("'", '').replace(",",".");
         const val = Number(valor)
         if(columns > index + 1 ){
-          keys += `'${key}',`
+          keys += `${key},`
           if(!isNaN(val)){
             values += `${valor},`
           }else{
@@ -90,10 +90,10 @@ const FileReaderComponent: React.FC = () => {
     )
   };
   return (
-    <section className="animate__animated animate__fadeIn w-full h-[100%] flex flex-col gap-2 p-2 text-slate-200  ">
+    <section className="animate__animated animate__fadeIn w-full md:h-full h-screen flex flex-col gap-2 p-2 text-slate-200  ">
       <div className='w-full flex flex-col h-1/2'>
         <h1 className="text-2xl font-bold">Lector de Archivos</h1>
-        <form onSubmit={handleFileChange} className="w-full mt-10 h-full flex flex-col gap-5">
+        <form onSubmit={handleFileChange} className="w-full mt-10 md:h-full  flex flex-col gap-5">
           <label htmlFor="" className='text-sm ' >Nombre de la Tabla</label>
           <input type="text" className='w-96 p-1 rounded-sm bg-slate-700 border' onChange={(e)=>setTable(e.target.value)} value={table}/>
           <label htmlFor="fileInput text-sm">Seleccione un archivo</label>
@@ -110,16 +110,16 @@ const FileReaderComponent: React.FC = () => {
       </div>
       {dataExcel ?  
         <>
-          <div className='w-full flex flex-row gap-2'>
+          <div className='w-full flex flex-row gap-5 mt-10'>
             <ButtonAnimation icon={IconTable} loading={false} text='Ver tabla' type='button' onClick={()=>setPantalla(1)}/>
             <ButtonAnimation icon={IconDev} loading={false} text='Ver Scrips' type='button' onClick={()=>setPantalla(2)}/>
             <ButtonAnimation icon={IconTracks} loading={false} text='Borrar Scrips' type='button' onClick={()=>setSql('')}/>
             <ButtonAnimation icon={IconCopy} loading={false} text='Copiar Scrips' type='button' onClick={()=>copySQL()}/>
           </div>
           {pantalla === 1 ?  
-            <div className='w-[80rem] h-96 overflow-auto relative'>
+            <div className='w-auto h-96 max-w-[100%] overflow-auto relative  p-2'>
               {/* <h2>{table}</h2> */}
-              <table className=' '>
+              <table className=' overflow-auto  '>
                 <thead className=''>
                   <tr>
                     {dataExcel ? Object?.keys(dataExcel[0])?.map((title:any,index:any)=>(

@@ -76,7 +76,7 @@ const FormateadorSqlLayout = () => {
 
   };
   return (
-    <section className="animate__animated animate__fadeIn w-full h-full flex flex-col gap-2 p-2 text-slate-300">
+    <section className="animate__animated animate__fadeIn w-full md:h-full h-screen flex flex-col gap-2 p-2 text-slate-300">
       <h1 className="text-2xl font-bold ">Formateador Consulta SQL</h1>
       <form action="" onSubmit={handleClickSubmit} className="w-full h-full flex flex-col mt-10 gap-5">
         <label htmlFor="" className="text-lg font-bold">Ingrese la consulta sql</label>
