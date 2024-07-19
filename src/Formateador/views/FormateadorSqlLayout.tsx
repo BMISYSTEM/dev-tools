@@ -58,7 +58,23 @@ const FormateadorSqlLayout = () => {
       const conIgual = formateadorPalabra(conOn,'=',format)
       format = ` )\n `
       const conCierre = formateadorPalabra(conIgual,')',format)
-      setSql(conCierre)
+      format = ` AS `
+      const conAs = formateadorPalabra(conCierre,'AS',format)
+      format = ` CASE `
+      const conCase = formateadorPalabra(conAs,'CASE',format)
+      format = ` WHEN `
+      const conWen = formateadorPalabra(conCase,'WHEN',format)
+      format = ` THEN `
+      const conthen = formateadorPalabra(conWen,'THEN',format)
+      format = ` ELSE `
+      const conElse = formateadorPalabra(conthen,'ELSE',format)
+      format = ` END `
+      const conEnd = formateadorPalabra(conElse,'END',format)
+      format = ` + `
+      const conMas = formateadorPalabra(conEnd,'+',format)
+      format = ` BETWEEN `
+      const conBetwewn = formateadorPalabra(conMas,'BETWEEN',format)
+      setSql(conBetwewn)
     }
     await format()
   }

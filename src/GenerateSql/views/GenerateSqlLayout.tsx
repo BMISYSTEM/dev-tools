@@ -8,6 +8,7 @@ import { IconCopy } from '../assets/IconCopy';
 import { toast } from 'react-toastify';
 import 'animate.css'
 import { IconExcel } from '../assets/IconExcel';
+
 const FileReaderComponent: React.FC = () => {
   const [excel, setExcel] = useState<any>(null);
   const [dataExcel,setDataExcel] = useState<any>(null)
@@ -61,7 +62,7 @@ const FileReaderComponent: React.FC = () => {
             values += `'${valor}',`
           }
         }else{
-          keys += `'${key}'`
+          keys += `${key}`
           if(!isNaN(val)){
             values += `${valor}`
           }else{
