@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import 'animate.css'
 
 
+
 const formateadorPalabra = (textSql:string,textBusqueda:string,estructura:string) =>{
   const oldsql = textSql.split(textBusqueda);
       let conAnd = '';
@@ -26,54 +27,55 @@ const FormateadorSqlLayout = () => {
     e.preventDefault()
     const format = async() =>{
       let format ='';
-      let sinespacios = sql.replace(/\s+/g, '');
-      let querySinSaltosDeLinea = sinespacios.replace(new RegExp('\n', 'gi'), '');
-      format = '  SELECT\n     '
+      const  querySinSaltosDeLinea = sql.replace(new RegExp('\n', 'gi'), ' ');
+      format = 'SELECT\n     '
       const conselect = formateadorPalabra(querySinSaltosDeLinea.toUpperCase(),'SELECT',format)
-      format = `,\n     `
+      format = `,\n\t`
       const concoma = formateadorPalabra(conselect,',',format)
-      format = '\nINSERT\n     '
-      const conInsert = formateadorPalabra(concoma,'INSERT',format)
-      format = '\nFROM\n     '
-      const conFrom = formateadorPalabra(conInsert,'FROM',format)
-      format = '\nINNER JOIN\n     '
-      const coninner = formateadorPalabra(conFrom,'INNERJOIN',format)
-      format = '\nLEFT JOIN\n     '
-      const conLeft = formateadorPalabra(coninner,'LEFTJOIN',format)
-      format = '\nGROUP BY\n     '
-      const congroup = formateadorPalabra(conLeft,'GROUPBY',format)
-      format = '\nORDER BY\n     '
-      const conorder = formateadorPalabra(congroup,'ORDER',format)
-      format = '\nHAVING\n     '
-      const conheaving = formateadorPalabra(conorder,'HAVING',format)
-      format = `\nWHERE\n     `
-      const conWhere = formateadorPalabra(conheaving,'WHERE',format)
-      format = `\n     AND  `
-      const conAnd = formateadorPalabra(conWhere,'AND',format)
-      format = `\n     BETWEEN  `
-      const conbetwen = formateadorPalabra(conAnd,'BETWEEN',format)
-      format = `\n     ON  `
-      const conOn = formateadorPalabra(conbetwen,'ON',format)
+      format = '\nINSERT\n\t'
+      const conInsert = formateadorPalabra(concoma,' INSERT ',format)
+      format = '\nFROM\n\t\t'
+      const conFrom = formateadorPalabra(conInsert,' FROM ',format)
+      format = '\nINNER JOIN\n\t'
+      const coninner = formateadorPalabra(conFrom,' INNER JOIN ',format)
+      format = 'WITH (NOLOCK) ON\n\t'
+      const conWith =  formateadorPalabra(coninner,' ON ',format)
+      format = '\nLEFT JOIN\n\t'
+      const conLeft = formateadorPalabra(conWith,' LEFT JOIN ',format)
+      format = '\nGROUP BY\n\t'
+      const congroup = formateadorPalabra(conLeft,' GROUP BY ',format)
+      format = '\nORDER BY\n\t'
+      const conorder = formateadorPalabra(congroup,' ORDER ',format)
+      format = '\nHAVING\n\t'
+      const conheaving = formateadorPalabra(conorder,' HAVING ',format)
+      format = `\nWHERE\n\t`
+      const conWhere = formateadorPalabra(conheaving,' WHERE ',format)
+      format = `\n\tAND\t  `
+      const conAnd = formateadorPalabra(conWhere,' AND ',format)
+      format = `\n\tBETWEEN \t`
+      const conbetwen = formateadorPalabra(conAnd,' BETWEEN ',format)
+      format = `\n\tON\t`
+      const conOn = formateadorPalabra(conbetwen,' ON ',format)
       format = ` = `
-      const conIgual = formateadorPalabra(conOn,'=',format)
+      const conIgual = formateadorPalabra(conOn,' = ',format)
       format = ` )\n `
       const conCierre = formateadorPalabra(conIgual,')',format)
-      format = ` AS `
-      const conAs = formateadorPalabra(conCierre,'AS',format)
+      format = `\tAS\t`
+      const conAs = formateadorPalabra(conCierre,' AS ',format)
       format = ` CASE `
-      const conCase = formateadorPalabra(conAs,'CASE',format)
+      const conCase = formateadorPalabra(conAs,' CASE ',format)
       format = ` WHEN `
-      const conWen = formateadorPalabra(conCase,'WHEN',format)
+      const conWen = formateadorPalabra(conCase,' WHEN ',format)
       format = ` THEN `
-      const conthen = formateadorPalabra(conWen,'THEN',format)
+      const conthen = formateadorPalabra(conWen,' THEN ',format)
       format = ` ELSE `
-      const conElse = formateadorPalabra(conthen,'ELSE',format)
+      const conElse = formateadorPalabra(conthen,' ELSE ',format)
       format = ` END `
-      const conEnd = formateadorPalabra(conElse,'END',format)
+      const conEnd = formateadorPalabra(conElse,' END ',format)
       format = ` + `
-      const conMas = formateadorPalabra(conEnd,'+',format)
+      const conMas = formateadorPalabra(conEnd,' + ',format)
       format = ` BETWEEN `
-      const conBetwewn = formateadorPalabra(conMas,'BETWEEN',format)
+      const conBetwewn = formateadorPalabra(conMas,' BETWEEN ',format)
       setSql(conBetwewn)
     }
     await format()
@@ -107,6 +109,7 @@ const FormateadorSqlLayout = () => {
         <div className="flex flex-row gap-3">
           <ButtonAnimation type="submit" text="Formatear" loading={false} icon={IconFormat}  />
           <ButtonAnimation type="button" text="Copy" loading={false} icon={IconCopy} onClick={()=>copySQL()}/>
+          
         </div>
       </form>
     </section>

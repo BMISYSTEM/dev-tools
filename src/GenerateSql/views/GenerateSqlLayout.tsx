@@ -124,7 +124,15 @@ const FileReaderComponent: React.FC = () => {
                 <thead className=''>
                   <tr>
                     {dataExcel ? Object?.keys(dataExcel[0])?.map((title:any,index:any)=>(
-                      <td key={index} className='p-2 text-xs bg-white/20 sticky top-0 backdrop-blur-sm'>{title}</td>
+                      <td key={index} className='p-2 text-xs bg-white/20 sticky top-0 backdrop-blur-sm text-center'>
+                        {/* {title} */}
+                        <td>
+                          <select name="" id="" className=' bg-slate-800 p-1 mt-1 rounded-xl' >
+                            <option value="" className='text-slate-200'>String</option>
+                            <option value="" className='text-slate-200'>Number</option>
+                          </select>
+                        </td>
+                      </td>
                     )): null}
                   </tr>
                 </thead>
